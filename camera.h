@@ -9,6 +9,7 @@ class camera {
     public:
         double aspect_ratio = 1.0;
         int image_width = 100;
+        
         void render(const hittable& world){
             initialize();
             // Render
@@ -37,11 +38,15 @@ class camera {
         vec3 pixel_delta_v; // offset to pixel below
 
         void initialize() {
+            image_height = int(image_width / aspect_ratio);
+            image_height = (image_height < 1) ? 1 : image_height;
+
+            center = point3(0, 0, 0);
+
             // Camera
             auto focal_length = 1.0;
             auto viewport_height = 2.0;
             auto viewport_width = viewport_height * (double(image_width)/image_height);
-            auto camera_center = point3(0, 0, 0);
 
             // Calculate the vectors on vertical and horizontal edges
             auto viewport_u = vec3(viewport_width, 0, 0);
@@ -52,7 +57,7 @@ class camera {
             auto pixel_delta_v = viewport_v / image_height;
 
             // Get location of upper left pixel
-            auto viewport_upper_left = camera_center - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
+            auto viewport_upper_left = center - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
             auto pixel00_loc = viewport_upper_left + 0.5*(pixel_delta_u + pixel_delta_v);
 
         }
