@@ -12,7 +12,7 @@ double hit_sphere(const point3& center, double radius, const ray& r){
     auto a = r.direction().length_squared(); // This is like x^2 + y^2 + z^2
     auto h = dot(r.direction(), oc); // Simplified from the quadratic equation
     auto c = oc.length_squared() - radius*radius;
-    auto discriminant = h*h - 4*a*c;
+    auto discriminant = h*h - a*c;
     
     if(discriminant<0){
         return -1.0;
