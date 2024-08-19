@@ -8,15 +8,16 @@ double hit_sphere(const point3& center, double radius, const ray& r){
     // Solving the quadratic equation to see if a solution exists
     //  There could be 0, 1, or 2 solutions
     vec3 oc = center - r.origin();
-    auto a = dot(r.direction(), r.direction()); // This is like x^2 + y^2 + z^2
-    auto b = -2.0 * dot(r.direction(), oc);
-    auto c = dot(oc, oc) - radius*radius;
-    auto discriminant = b*b - 4*a*c;
+    // Dot product of the direction can be simplified to the length of it squared
+    auto a = r.direction().length_squared(); // This is like x^2 + y^2 + z^2
+    auto h = dot(r.direction(), oc); // Simplified from the quadratic equation
+    auto c = oc.length_squared() - radius*radius;
+    auto discriminant = h*h - 4*a*c;
     
     if(discriminant<0){
         return -1.0;
     } else {
-        return (-b - std::sqrt(discriminant) ) / (2.0*a);
+        return (h - std::sqrt(discriminant)) / a;
     }
 }
 
