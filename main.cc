@@ -21,7 +21,7 @@ double hit_sphere(const point3& center, double radius, const ray& r){
 }
 
 color ray_color(const ray& r){
-    // Check to see if and where the ray hits the sphere defined by the inputs
+    // Base the color of the pixel on where the ray hits the sphere
     auto t = hit_sphere(point3(0, 0, -1), 0.5, r);
     if(t > 0.0){
         vec3 N = unit_vector(r.at(t) - vec3(0, 0, -1));
