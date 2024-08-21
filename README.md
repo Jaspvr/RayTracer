@@ -3,7 +3,7 @@ This repository contains a ray tracer implementation based on the book [Ray Trac
 #### Orbits of mercury, venus, earth, mars, and the moon
 ![Solar System](src/solar_system/output.gif)
 #### Moving camera angle
-![Solar System](src/solar_system_camera/output3.gif)
+![Solar System](src/solar_system_camera/output4.gif)
 
 ## Ray Tracing
 Ray tracing is the process of modelling the behaviour of light in a virtual environment. This involves sending out rays from a plane that represents a camera’s point of view and determining the colour to assign the pixel where the ray originated based on the interaction of the ray with objects in the scene. The purpose is to render accurate and detailed images with low manual efforts. Ray tracing is commonly used in the making of animated movies and video games.
