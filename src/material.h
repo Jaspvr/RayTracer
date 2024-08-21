@@ -111,7 +111,7 @@ public:
     }
 
     virtual color emitted() const override {
-        return emit_color; // Return the color of the light
+        return emit_color;
     }
 
     virtual color albedo() const override {

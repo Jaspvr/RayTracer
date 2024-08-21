@@ -52,10 +52,6 @@ int main() {
         // Update the camera angle
         if(i<20){
             float camera_position = float(i)/20.0;
-            // float x = 13.0-13.0*camera_position;
-            // float y = 2.0+18.0*camera_position;
-            // float z = 3.0-3.0*camera_position;
-            // std::cout << x << " " << y << " " << z << " ";
             cam.lookfrom = point3((13.0-13.0*camera_position), (2.0+18.0*camera_position), (3.0-3.0*camera_position));
         }else if(i >30){
             float camera_position = abs( ( float(i-30)/20.0) - 1.0 ); // does the inverse of iterations 1 to 20
@@ -67,7 +63,9 @@ int main() {
         // Stationary sphere
         world.add(make_shared<sphere>(point3(centerx, 1, centerz), 1.0, sun));
 
+        // Iterating variable to push the planets along their orbiting radius
         float angle = 2.0 * M_PI * float(i) / frames;
+
         // Orbiting Planets (angle is multiplied to capture relative orbit speed)
         float x_mercury = centerx + radius_mercury * cos(angle * 4.15);
         float z_mercury = centerz + radius_mercury * sin(angle * 4.15);
@@ -98,7 +96,7 @@ int main() {
         std::ofstream output_file(sst.str());
         std::streambuf* old_buf = std::cout.rdbuf(output_file.rdbuf()); // Redirect std::cout
 
-        cam.render(world); // Call the render function
+        cam.render(world);
 
         // Reset std::cout to its original state
         std::cout.rdbuf(old_buf);
