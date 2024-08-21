@@ -77,8 +77,7 @@ class camera {
         pixel_delta_v = viewport_v / image_height;
 
         // Calculate the location of the upper left pixel.
-        auto viewport_upper_left =
-            center - (focal_length*w) - viewport_u/2 - viewport_v/2;
+        auto viewport_upper_left = center - (focal_length*w) - viewport_u/2 - viewport_v/2;
         pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
     }
 
@@ -109,12 +108,8 @@ class camera {
             ray scattered;
             color attenuation;
             color emitted = rec.mat->emitted();
-            // if (rec.mat->scatter(r, rec, attenuation, scattered))
-            //     return attenuation * ray_color(scattered, depth-1, world);
-            // return color(0, 0, 0);
             if (rec.mat->scatter(r, rec, attenuation, scattered))
                 return emitted + attenuation * ray_color(scattered, depth - 1, world);
-            // return emitted;
 
             return emitted + rec.mat->albedo();
         }
