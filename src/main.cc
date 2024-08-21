@@ -13,7 +13,7 @@
 
 
 int main() {
-    int frames = 40;
+    int frames = 50;
 
     auto sun = make_shared<emissive>(color(0.8, 0.8, 0.3));
     auto mercury = make_shared<lambertian>(color(0.663, 0.663, 0.663));
@@ -27,7 +27,7 @@ int main() {
 
     cam.aspect_ratio      = 16.0 / 9.0;
     cam.image_width       = 1200;
-    cam.samples_per_pixel = 50;
+    cam.samples_per_pixel = 20;
     cam.max_depth         = 50;
 
     cam.vfov     = 50;
@@ -45,8 +45,20 @@ int main() {
     float centerx = 0.0;
     float centerz = 0.0;
 
-    for(int i = 0; i<frames; i++){
+
+    for(int i = 30; i<frames; i++){
         hittable_list world;
+
+        // Update the camera angle
+        if(i<20){
+            float camera_position = float(i)/20.0;
+            cam.lookfrom = point3((13.0-13.0*camera_position), (2.0+18.0*camera_position), (3.0-3.0*camera_position));
+        }else if(i >30){
+            float camera_position = abs( ( float(i-30)/20.0) - 1.0 ); // does the inverse of iterations 1 to 20
+            cam.lookfrom = point3((13.0-13.0*camera_position), (2.0+18.0*camera_position), (3.0-3.0*camera_position));
+        }else{
+            cam.lookfrom = point3(0.1, 20.0, 0.1);
+        }
         
         // Stationary sphere
         world.add(make_shared<sphere>(point3(centerx, 1, centerz), 1.0, sun));
@@ -78,7 +90,7 @@ int main() {
 
         // Save the scene to a file
         std::stringstream sst;
-        sst << "solar_system" << "/frame" << std::setw(3) << std::setfill('0') << i << ".ppm";
+        sst << "solar_system_camera" << "/frame" << std::setw(3) << std::setfill('0') << i << ".ppm";
         std::ofstream output_file(sst.str());
         std::streambuf* old_buf = std::cout.rdbuf(output_file.rdbuf()); // Redirect std::cout
 
