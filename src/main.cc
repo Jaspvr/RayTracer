@@ -46,7 +46,7 @@ int main() {
     float centerz = 0.0;
 
 
-    for(int i = 30; i<frames; i++){
+    for(int i = 0; i<frames; i++){
         hittable_list world;
 
         // Update the camera angle
@@ -57,7 +57,7 @@ int main() {
             float camera_position = abs( ( float(i-30)/20.0) - 1.0 ); // does the inverse of iterations 1 to 20
             cam.lookfrom = point3((13.0-13.0*camera_position), (2.0+18.0*camera_position), (3.0-3.0*camera_position));
         }else{
-            cam.lookfrom = point3(0.1, 20.0, 0.1);
+            cam.lookfrom = point3(0.01, 20.0, 0.01);
         }
         
         // Stationary sphere
