@@ -1,8 +1,8 @@
 ## Overview
 This repository contains a ray tracer implementation based on the book [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) along with animations created by combining many ray traced images using the ffmpeg command line tool. 
-### Orbits of mercury, venus, earth, mars, and the moon
+#### Orbits of mercury, venus, earth, mars, and the moon
 ![Solar System](src/solar_system/output.gif)
-### Moving camera angle
+#### Moving camera angle
 ![Solar System](src/solar_system_camera/output3.gif)
 
 ## Ray Tracing
